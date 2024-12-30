@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #b6d3ef; /* Changed to the desired background color */
+            color: #fff;
+        }
+        .card {
+            background: rgba(34, 3, 3, 0.256);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4 text-white" style="width: 28rem;">
+            <h3 class="text-center mb-4">Login</h3>
+            <ul class="nav nav-tabs mb-3" id="loginTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="patient-tab" data-bs-toggle="tab" data-bs-target="#patient" type="button" role="tab" aria-controls="patient" aria-selected="true">Patient</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="doctor-tab" data-bs-toggle="tab" data-bs-target="#doctor" type="button" role="tab" aria-controls="doctor" aria-selected="false">Doctor</button>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <!-- Patient Login -->
+                <div class="tab-pane fade show active" id="patient" role="tabpanel" aria-labelledby="patient-tab">
+                    <form id="patientForm">
+                        <div class="mb-3">
+                            <label for="patientUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="patientUsername" placeholder="Enter your username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="patientPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="patientPassword" placeholder="Enter your password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="emergencyPhone" class="form-label">Emergency Phone Number</label>
+                            <input type="tel" class="form-control" id="emergencyPhone" placeholder="Enter your emergency phone number">
+                        </div>
+                        <div class="d-grid">
+                            <a href="home.html">
+                                <button type="button" class="btn btn-primary">Login</button>
+                            </a>
+                        </div>
+                        <p class="text-center mt-3">Don't have an account? <a href="signup.html" class="text-warning">Sign up</a></p>
+                    </form>
+                </div>
+                
+
+                <!-- Doctor Login -->
+                <div class="tab-pane fade" id="doctor" role="tabpanel" aria-labelledby="doctor-tab">
+                    <form id="doctorForm">
+                        <div class="mb-3">
+                            <label for="doctorName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="doctorName" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="doctorID" class="form-label">ID Proof</label>
+                            <input type="text" class="form-control" id="doctorID" placeholder="Enter your ID proof">
+                        </div>
+                        <div class="mb-3">
+                            <label for="doctorHospital" class="form-label">Hospital</label>
+                            <input type="text" class="form-control" id="doctorHospital" placeholder="Enter your hospital name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="doctorPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="doctorPassword" placeholder="Enter your password">
+                        </div>
+                        <div class="d-grid">
+                            <a href="appointment.html">
+                                <button type="button" class="btn btn-primary">Login</button>
+                            </a>
+                        </div>
+                        <p class="text-center mt-3">Don't have an account? <a href="signup.html" class="text-warning">Sign up</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+

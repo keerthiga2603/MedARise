@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital OP Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: #003366; /* Dark blue background */
+        }
+        .navbar .navbar-brand {
+            font-size: 1.8rem; /* Increase title size */
+        }
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Make navbar options white */
+            font-size: 1.1rem;
+        }
+        .navbar .navbar-brand img {
+            width: 50px; /* Adjust logo size */
+            height: auto;
+        }
+        body {
+            background-color: #b6d3ef;
+        }
+        .card {
+            margin: 20px 0;
+        }
+        .view-details-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #5f81a4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .view-details-btn:hover {
+            background-color: #0056b3;
+        }
+        .modal-content {
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="MedARise.jpg" alt="Logo" class="me-2">
+                <span>MedARise</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="counselling.html">Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="op.html">OP Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="main.html">Medicheck</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cbt.html">CBT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="disease.html">prone-zone</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Hospital Outpatient Booking</h1>
+
+        <!-- Region Selection -->
+        <div class="mb-4">
+            <label for="regionSelect" class="form-label">Select Your Region:</label>
+            <select id="regionSelect" class="form-select" onchange="filterHospitalsByRegion()">
+                <option value="Madurai">Madurai</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+            </select>
+        </div>
+        <input 
+    type="text" 
+    id="hospitalSearch" 
+    class="form-control mb-3" 
+    placeholder="Search hospitals in Madurai..." 
+    oninput="searchHospitals()">
+
+        <!-- Hospital List -->
+        <div id="hospitalList" class="hospital-list">
+            <!-- Hospital cards will be dynamically populated -->
+        </div>
+
+        <!-- Modal for Hospital Details and Booking -->
+        <div class="modal fade" id="hospitalDetailsModal" tabindex="-1" aria-labelledby="hospitalDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="hospitalDetailsModalLabel">Hospital Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalHospitalDetails">
+                        <!-- Hospital details will be populated here -->
+                    </div>
+                    <div class="modal-footer">
+                        <form id="appointmentForm" class="w-100">
+                            <div class="mb-3">
+                                <label for="patientName" class="form-label">Patient Name:</label>
+                                <input type="text" id="patientName" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="symptoms" class="form-label">Symptoms:</label>
+                                <textarea id="symptoms" class="form-control" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="appointmentDate" class="form-label">Appointment Date:</label>
+                                <input type="date" id="appointmentDate" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const hospitals = [
+            { name: "Apollo Speciality Hospitals Madurai", address: "Address of Apollo Madurai", headDoctor: "Dr. A", contact: "1234567890", region: "Madurai" },
+            { name: "KRS NULIFE Hospitals Pvt Ltd", address: "Address of KRS NULIFE", headDoctor: "Dr. B", contact: "0987654321", region: "Madurai" },
+            { name: "Arun Hospital Pvt Ltd, Madurai", address: "Address of Arun Hospital", headDoctor: "Dr. C", contact: "1122334455", region: "Madurai" },
+            { name: "Easvara Hospital", address: "Address of Easvara Hospital", headDoctor: "Dr. D", contact: "2233445566", region: "Madurai" },
+            { name: "Bright Hospital, Madurai Tn", address: "Address of Bright Hospital", headDoctor: "Dr. E", contact: "3344556677", region: "Madurai" },
+            { name: "Bharathi Hospital Madurai", address: "Address of Bharathi Hospital", headDoctor: "Dr. F", contact: "4455667788", region: "Madurai" },
+            { name: "NTC Gastro and Multispeciality Hospitals", address: "Address of NTC Gastro", headDoctor: "Dr. G", contact: "5566778899", region: "Madurai" },
+            { name: "Raks Hospitals Pvt Ltd", address: "Address of Raks Hospital", headDoctor: "Dr. H", contact: "6677889900", region: "Madurai" },
+            { name: "Meenakshi Mission Hospital & Research Centre", address: "Address of Meenakshi Mission", headDoctor: "Dr. I", contact: "7788990011", region: "Madurai" },
+            { name: "Apollo Hospital Chennai", address: "Address of Apollo Chennai", headDoctor: "Dr. X", contact: "8888888888", region: "Chennai" },
+            { name: "Fortis Hospital Chennai", address: "Address of Fortis Chennai", headDoctor: "Dr. Y", contact: "9999999999", region: "Chennai" },
+            { name: "Ganga Hospital Coimbatore", address: "Address of Ganga Hospital", headDoctor: "Dr. Z", contact: "7777777777", region: "Coimbatore" },
+        ];
+
+        const hospitalList = document.getElementById('hospitalList');
+        const regionSelect = document.getElementById('regionSelect');
+        const modalHospitalDetails = document.getElementById('modalHospitalDetails');
+        const appointmentForm = document.getElementById('appointmentForm');
+        let selectedHospital = null;
+        let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+        function searchHospitals() {
+            const searchValue = document.getElementById('hospitalSearch').value.toLowerCase();
+            const region = regionSelect.value;
+
+            // Filter only hospitals in the selected region (Madurai)
+            const filteredHospitals = hospitals.filter(
+                (hospital) => hospital.region === "Madurai" && hospital.name.toLowerCase().includes(searchValue)
+            );
+
+            // Clear current hospital list
+            hospitalList.innerHTML = '';
+
+            // Populate filtered results
+            filteredHospitals.forEach((hospital, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${hospital.name}</h5>
+                        <button class="view-details-btn" onclick="showHospitalDetails(${index})">View Details</button>
+                    </div>
+                `;
+                hospitalList.appendChild(card);
+            });
+
+            // Display "No results" message if no matches are found
+            if (filteredHospitals.length === 0) {
+                hospitalList.innerHTML = '<p class="text-center">No hospitals found.</p>';
+            }
+        }
+
+        function filterHospitalsByRegion() {
+            const region = regionSelect.value;
+            hospitalList.innerHTML = '';
+            hospitals
+                .filter(hospital => hospital.region === region)
+                .forEach((hospital, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${hospital.name}</h5>
+                            <button class="view-details-btn" onclick="showHospitalDetails(${index})">View Details</button>
+                        </div>
+                    `;
+                    hospitalList.appendChild(card);
+                });
+        }
+
+        function showHospitalDetails(index) {
+            selectedHospital = hospitals[index];
+            modalHospitalDetails.innerHTML = `
+                <p><strong>Name:</strong> ${selectedHospital.name}</p>
+                <p><strong>Address:</strong> ${selectedHospital.address}</p>
+                <p><strong>Head Doctor:</strong> ${selectedHospital.headDoctor}</p>
+                <p><strong>Contact:</strong> ${selectedHospital.contact}</p>
+            `;
+            const modal = new bootstrap.Modal(document.getElementById('hospitalDetailsModal'));
+            modal.show();
+        }
+
+        appointmentForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const patientName = document.getElementById('patientName').value;
+            const symptoms = document.getElementById('symptoms').value;
+            const appointmentDate = document.getElementById('appointmentDate').value;
+
+            if (!selectedHospital) {
+                alert("Please select a hospital first.");
+                return;
+            }
+
+            const newAppointment = {
+                patientName,
+                symptoms,
+                appointmentDate,
+                hospital: selectedHospital.name,
+            };
+
+            appointments.push(newAppointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+            appointmentForm.reset();
+            alert('Appointment booked successfully! Your token number is 3, you are requested to arrive at 10:30 A.M');
+        });
+
+        filterHospitalsByRegion();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

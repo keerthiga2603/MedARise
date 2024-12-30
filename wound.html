@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wound Healing Monitor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #b6d3ef;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #b6d3ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #b6d3ef;
+        }
+
+        #sensorData p {
+            font-size: 1.2rem;
+        }
+
+        #woundStatus {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #woundStatus p {
+            color: #00ff00;  /* Default Green for normal status */
+        }
+
+        #woundStatus p.warning {
+            color: #ff9900;  /* Yellow for warning */
+        }
+
+        #woundStatus p.danger {
+            color: #ff3333;  /* Red for danger */
+        }
+
+        .btn-danger {
+            width: 100%;
+            background-color: #ff3333;
+            border-color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Wound Healing Monitor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="main.html">Medicheck</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="wound.html">Wound Checking</a></li>
+                <li class="nav-item"><a class="nav-link" href="calendar.html">Your Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="symp.html">Symptom Tracker</a></li>
+                <li class="nav-item"><a class="nav-link" href="reports.html">Weekly and Monthly Reports</a></li>
+                <li class="nav-item"><a class="nav-link" href="appointment.html">Doctor Appointments</a></li>
+                <li class="nav-item"><a class="nav-link" href="exp.html">Expert Consultations</a></li>
+                <li class="nav-item"><a class="nav-link" href="guide.html">Personalized Guidance</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <div class="container">
+        <h2>Wound Healing Monitoring</h2>
+        <div id="sensorData">
+            <p>Temperature: <span id="temp">Loading...</span></p>
+            <p>Humidity: <span id="humidity">Loading...</span></p>
+            <p>Pressure: <span id="pressure">Loading...</span></p>
+        </div>
+
+        <div id="woundStatus">
+            <p id="status">Wound Status: Normal</p>
+        </div>
+
+        <button id="contactDoctorBtn" class="btn btn-danger">Contact Doctor</button>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Wound Healing Monitoring. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Simulating Sensor Data
+        function displaySensorData(data) {
+            const temperature = data.temperature;
+            const humidity = data.humidity;
+            const pressure = data.pressure;
+
+            // Update the UI with the data
+            document.getElementById('temp').innerText = `${temperature} °C`;
+            document.getElementById('humidity').innerText = `${humidity}%`;
+            document.getElementById('pressure').innerText = `${pressure} mmHg`;
+
+            // Analyze the data to determine wound status
+            const statusElement = document.getElementById('status');
+
+            if (temperature > 38 || pressure > 1050) {
+                statusElement.innerText = "Wound Status: Immediate Attention Required";
+                statusElement.classList.add("danger");
+                statusElement.classList.remove("warning");
+                statusElement.classList.remove("normal");
+            } else if (temperature > 37.5 || pressure > 1025) {
+                statusElement.innerText = "Wound Status: Warning";
+                statusElement.classList.add("warning");
+                statusElement.classList.remove("danger");
+                statusElement.classList.remove("normal");
+            } else {
+                statusElement.innerText = "Wound Status: Normal";
+                statusElement.classList.add("normal");
+                statusElement.classList.remove("warning");
+                statusElement.classList.remove("danger");
+            }
+        }
+
+        // Simulated Sensor Data (Replace with real data later)
+        let mockData = {
+            temperature: 37.0, // Simulated temperature
+            humidity: 60, // Simulated humidity
+            pressure: 1020 // Simulated pressure
+        };
+
+        // Update every 5 seconds with simulated data
+        setInterval(() => {
+            mockData.temperature = (Math.random() * 2) + 36.5; // Random temp between 36.5 and 38.5
+            mockData.humidity = Math.floor(Math.random() * 100); // Random humidity between 0 and 100
+            mockData.pressure = Math.floor(Math.random() * (1050 - 1000) + 1000); // Random pressure between 1000 and 1050
+
+            displaySensorData(mockData);
+        }, 5000); // Update every 5 seconds
+
+        // Button Action to Contact Doctor
+        document.getElementById('contactDoctorBtn').addEventListener('click', function() {
+            alert('Contacting your doctor...');
+            // Here you can implement functionality to send an email, open contact form, or send alert.
+        });
+    </script>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counseling Chatbot</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Navbar Style */
+        .navbar {
+            background-color: #003366;
+        }
+        .navbar .navbar-brand {
+            font-size: 1.8rem;
+        }
+        .navbar .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.1rem;
+        }
+        .navbar .navbar-brand img {
+            width: 50px;
+            height: auto;
+        }
+
+        /* Page Background */
+        body {
+            background-color: #b6d3ef;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Chatbot Container */
+        .chatbox {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbox-header {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .chatbox-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        /* Speech bubbles */
+        .user-message, .bot-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 75%;
+        }
+
+        .user-message {
+            background-color: #003366;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #e3e3e3;
+            color: #333;
+            align-self: flex-start;
+        }
+
+        /* Input and button */
+        .chatbox-input {
+            display: flex;
+        }
+
+        .chatbox-input input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chatbox-input button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #003366;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chatbox-input button:hover {
+            background-color: #002244;
+        }
+
+        /* Video Section */
+        .video-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .video-section iframe {
+            width: 80%;
+            height: 400px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="MedARise.jpg" alt="Logo" class="me-2">
+            <span>MedARise</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="counselling.html">Guide</a></li>
+                <li class="nav-item"><a class="nav-link" href="op.html">OP Booking</a></li>
+                <li class="nav-item"><a class="nav-link" href="main.html">Medicheck</a></li>
+                <li class="nav-item"><a class="nav-link" href="cbt.html">CBT</a></li>
+                <li class="nav-item"><a class="nav-link" href="disease.html">prone-zone</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Chatbot Section -->
+<div class="chatbox">
+    <div class="chatbox-header">
+        Counseling Chatbot
+    </div>
+    <div class="chatbox-messages" id="chatboxMessages">
+        <!-- Messages will be displayed here -->
+    </div>
+    <div class="chatbox-input">
+        <input type="text" id="userInput" placeholder="Ask something..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<!-- Video Section -->
+<div class="video-section">
+    <h2 style="color: gray;">Watch this Counseling Video</h2>
+    <iframe src="https://www.youtube.com/embed/dGIepaWAoZU" title="Counseling Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Chatbot JavaScript -->
+<script>
+    function sendMessage() {
+        var userMessage = document.getElementById("userInput").value;
+        if (userMessage) {
+            var chatboxMessages = document.getElementById("chatboxMessages");
+
+            // Display user message
+            var userMessageElement = document.createElement("div");
+            userMessageElement.classList.add("user-message");
+            userMessageElement.textContent = "You: " + userMessage;
+            chatboxMessages.appendChild(userMessageElement);
+
+            // Simulate bot response with delay
+            setTimeout(function() {
+                var botReply = getBotReply(userMessage);
+                var botMessageElement = document.createElement("div");
+                botMessageElement.classList.add("bot-message");
+                botMessageElement.textContent = "Counselor: " + botReply;
+                chatboxMessages.appendChild(botMessageElement);
+
+                // Scroll to the bottom of the chat
+                chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+            }, 1000);
+
+            // Clear the input field
+            document.getElementById("userInput").value = "";
+        }
+    }
+
+    function getBotReply(userMessage) {
+        userMessage = userMessage.toLowerCase();
+        if (userMessage.includes("hello") || userMessage.includes("hi")) {
+            return "Hello! How can I assist you today?";
+        } else if (userMessage.includes("help")) {
+            return "I'm here to help. What do you need assistance with?";
+        } else if (userMessage.includes("depression")) {
+            return "I'm really sorry you're feeling this way. Here are some tips to manage depression:\n- Talk to someone you trust.\n- Practice relaxation techniques like meditation.\n- Engage in activities that bring you joy.\n- Seek professional help if needed.";
+        } else if (userMessage.includes("thanks")) {
+            return "You're welcome! Let me know if you need anything else.";
+        } else {
+            return "I'm not sure how to respond to that. Could you ask something else?";
+        }
+    }
+</script>
+
+</body>
+</html>
+

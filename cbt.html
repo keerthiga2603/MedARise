@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tips</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: #003366; /* Dark blue background */
+        }
+        .navbar .navbar-brand {
+            font-size: 1.8rem; /* Increase title size */
+        }
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Make navbar options white */
+            font-size: 1.1rem;
+        }
+        .navbar .navbar-brand img {
+            width: 50px; /* Adjust logo size */
+            height: auto;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #b6d3ef;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #diseaseForm {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #diseaseInput {
+            padding: 8px;
+            width: 50%;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #submitBtn {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #submitBtn:hover {
+            background-color: #45a049;
+        }
+
+        #suggestionsContainer {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .box {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .box h2 {
+            color: #4CAF50;
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        .box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .box ul li {
+            margin-bottom: 8px;
+        }
+
+        .video-links a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .video-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            #diseaseInput {
+                width: 70%;
+            }
+
+            .box {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="MedARise.jpg" alt="Logo" class="me-2">
+                <span>MedARise</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="counselling.html">Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="op.html">OP Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="main.html">Medicheck</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cbt.html">CBT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="disease.html">Prone-Zone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="container">
+    <h1>Health Tips for Common Diseases</h1>
+
+    <!-- Form to input disease -->
+    <form id="diseaseForm">
+        <input type="text" id="diseaseInput" placeholder="Enter disease name (e.g., headache)" required>
+        <button type="submit" id="submitBtn">Get Tips</button>
+    </form>
+
+    <!-- Display suggestions -->
+    <div id="suggestionsContainer">
+        <!-- Food Habits -->
+        <div class="box">
+            <h2>Food Habits</h2>
+            <ul id="foodHabitsList"></ul>
+        </div>
+
+        <!-- Exercise -->
+        <div class="box">
+            <h2>Exercise</h2>
+            <ul id="exerciseList"></ul>
+        </div>
+
+        <!-- Videos -->
+        <div class="box video-links">
+            <h2>Helpful Videos</h2>
+            <div id="videoList"></div>
+        </div>
+
+        <!-- Sleep Tips -->
+        <div class="box">
+            <h2>Sleep Tips</h2>
+            <ul id="sleepTipsList"></ul>
+        </div>
+
+        <!-- Mindfulness -->
+        <div class="box">
+            <h2>Mindfulness Techniques</h2>
+            <ul id="mindfulnessList"></ul>
+        </div>
+
+        <!-- Self-Care -->
+        <div class="box">
+            <h2>Self-Care Tips</h2>
+            <ul id="selfCareList"></ul>
+        </div>
+
+        <!-- Hydration -->
+        <div class="box">
+            <h2>Hydration Tips</h2>
+            <ul id="hydrationList"></ul>
+        </div>
+
+        <!-- Therapy Options -->
+        <div class="box">
+            <h2>Therapy Options</h2>
+            <ul id="therapyOptionsList"></ul>
+        </div>
+
+        <!-- Interactive Tools -->
+        <div class="box">
+            <h2>Interactive Tools</h2>
+            <ul id="interactiveToolsList"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    const healthData = {
+        "headache": {
+            foodHabits: ["Eat foods rich in magnesium (e.g., spinach, almonds)", "Avoid processed foods and alcohol"],
+            exercise: ["Gentle yoga poses for relaxation", "Breathing exercises to relieve tension"],
+            videos: [
+                "https://www.youtube.com/watch?v=J3IEOHzoxUw", 
+                "https://www.youtube.com/watch?v=9wBnd4cgeqE"
+            ],
+            sleepTips: ["Sleep in a dark, quiet room", "Use a cool compress on the forehead"],
+            mindfulness: ["Mindful breathing to reduce pain", "Guided meditation for relaxation"],
+            selfCare: ["Use a cold or warm compress on the head", "Try massaging the temples to release tension"],
+            hydration: ["Drink water to stay hydrated", "Avoid caffeine to reduce dehydration"],
+            therapyOptions: ["Over-the-counter pain relievers", "Acupressure therapy for headaches"],
+            interactiveTools: ["Headache tracking apps", "Pain management apps"]
+        },
+        "cold": {
+            foodHabits: ["Eat foods rich in vitamin C (e.g., oranges, strawberries)", "Avoid dairy products that can thicken mucus"],
+            exercise: ["Gentle stretching to improve circulation", "Breathing exercises to clear the airways"],
+            videos: [
+                "https://www.youtube.com/watch?v=kfI4xKLlt4Q", 
+                "https://www.youtube.com/watch?v=3D8doNQOmuA"
+            ],
+            sleepTips: ["Sleep with your head elevated", "Stay warm and cozy in bed"],
+            mindfulness: ["Breathing exercises to ease nasal congestion", "Visualization techniques for relaxation"],
+            selfCare: ["Steam inhalation to clear sinuses", "Drink herbal teas like ginger or peppermint"],
+            hydration: ["Stay hydrated with warm liquids", "Avoid sugary drinks and sodas"],
+            therapyOptions: ["Decongestant medications", "Home remedies like honey and lemon"],
+            interactiveTools: ["Cold symptom tracker apps", "Virtual health consultations"]
+        },
+        "cough": {
+            foodHabits: ["Eat honey and warm lemon water", "Avoid cold or dairy-based foods"],
+            exercise: ["Gentle stretching to open the chest", "Deep breathing exercises to clear the lungs"],
+            videos: [
+                "https://www.youtube.com/watch?v=eS8Yhu3erqw", 
+                "https://www.youtube.com/watch?v=gs4l7i96Hrs"
+            ],
+            sleepTips: ["Sleep with an extra pillow to keep your head elevated", "Use a humidifier to moisten the air"],
+            mindfulness: ["Guided meditation to manage stress during illness", "Breathing exercises for soothing the throat"],
+            selfCare: ["Drink herbal teas like ginger or chamomile", "Use cough lozenges to soothe the throat"],
+            hydration: ["Stay hydrated with warm liquids", "Avoid drinks that dry the throat (e.g., alcohol)"],
+            therapyOptions: ["Cough syrups", "Herbal remedies like ginger or thyme"],
+            interactiveTools: ["Cough tracking apps", "Breathing exercise apps"]
+        },
+        "diabetes": {
+            foodHabits: ["Eat foods with a low glycemic index (e.g., whole grains, vegetables)", "Avoid sugary drinks and snacks"],
+            exercise: ["Regular moderate exercise like walking", "Strength training to improve insulin sensitivity"],
+            videos: [
+                "https://www.youtube.com/watch?v=LoF0mgchVxI", 
+                "https://www.youtube.com/watch?v=9zbrm9CBeDQ"
+            ],
+            sleepTips: ["Maintain a regular sleep schedule", "Sleep with a pillow to support the spine"],
+            mindfulness: ["Mindfulness meditation to manage stress", "Breathing exercises to maintain blood sugar levels"],
+            selfCare: ["Monitor blood sugar levels regularly", "Manage stress through relaxation techniques"],
+            hydration: ["Drink water regularly", "Avoid sugary beverages that spike blood sugar"],
+            therapyOptions: ["Insulin therapy", "Oral medications like metformin"],
+            interactiveTools: ["Blood sugar tracking apps", "Diabetes management apps"]
+        },
+        "stress": {
+            foodHabits: ["Eat foods rich in vitamin B and magnesium (e.g., bananas, avocados)", "Avoid caffeine and junk food"],
+            exercise: ["Physical activity to release endorphins", "Breathing exercises to reduce anxiety"],
+            videos: [
+                "https://www.youtube.com/watch?v=Z15p0d36XYA", 
+                "https://www.youtube.com/watch?v=5Ad5bT0m3dM"
+            ],
+            sleepTips: ["Practice relaxation techniques before bed", "Avoid screen time and caffeine in the evening"],
+            mindfulness: ["Guided meditation for stress relief", "Mindfulness-based stress reduction (MBSR)"],
+            selfCare: ["Try aromatherapy with calming scents like lavender", "Keep a journal to manage emotions"],
+            hydration: ["Drink water throughout the day", "Avoid alcohol and sugary drinks"],
+            therapyOptions: ["Cognitive Behavioral Therapy (CBT)", "Massage therapy for stress relief"],
+            interactiveTools: ["Stress relief apps", "Mindfulness and meditation apps"]
+        }
+    };
+
+    // Function to handle form submission
+    // Function to handle form submission
+document.getElementById("diseaseForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const disease = document.getElementById("diseaseInput").value.trim().toLowerCase();
+    
+    if (disease === "") {
+        alert("Please enter a disease name.");
+        return;
+    }
+    
+    displaySuggestions(disease);
+});
+
+// Function to display suggestions based on input disease
+function displaySuggestions(disease) {
+    const diseaseData = healthData[disease];
+    if (diseaseData) {
+        document.getElementById("suggestionsContainer").style.display = "block";
+
+        document.getElementById("foodHabitsList").innerHTML = diseaseData.foodHabits
+            .map(item => `<li>${item}</li>`)
+            .join("");
+
+        document.getElementById("exerciseList").innerHTML = diseaseData.exercise
+            .map(item => `<li>${item}</li>`)
+            .join("");
+
+        document.getElementById("videoList").innerHTML = diseaseData.videos
+            .map(link => `<a href="${link}" target="_blank">Watch Video</a>`)
+            .join("<br>");
+
+        document.getElementById("sleepTipsList").innerHTML = diseaseData.sleepTips
+            .map(item => `<li>${item}</li>`)
+            .join("");
+
+        document.getElementById("mindfulnessList").innerHTML = diseaseData.mindfulness
+            .map(item => `<li>${item}</li>`)
+            .join("");
+
+        document.getElementById("selfCareList").innerHTML = diseaseData.selfCare
+            .map(item => `<li>${item}</li>`)
+            .join("");
+
+        document.getElementById("hydrationList").innerHTML = diseaseData.hydration
+            .map(item => `<li>${item}</li>`)
+            .join("");
+
+        document.getElementById("therapyOptionsList").innerHTML = diseaseData.therapyOptions
+            .map(item => `<li>${item}</li>`)
+            .join("");
+
+        document.getElementById("interactiveToolsList").innerHTML = diseaseData.interactiveTools
+            .map(item => `<li>${item}</li>`)
+            .join("");
+    } else {
+        alert("Disease not found in the database. Please try another.");
+    }
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

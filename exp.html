@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Consultations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #b6d3ef;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #b6d3ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+
+        .mentor-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            color: #b6d3ef;
+            text-align: center;
+        }
+
+        .mentor-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #b6d3ef;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #003366;
+            border-color: #003366;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003366;">
+        <a class="navbar-brand" href="#">Asthma Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="main.html">Medicheck</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="wound.html">Wound Checking</a></li>
+                <li class="nav-item"><a class="nav-link" href="calendar.html">Your Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="symp.html">Symptom Tracker</a></li>
+                <li class="nav-item"><a class="nav-link" href="reports.html">Weekly and Monthly Reports</a></li>
+                <li class="nav-item"><a class="nav-link" href="appointment.html">Doctor Appointments</a></li>
+                <li class="nav-item"><a class="nav-link" href="exp.html">Expert Consultations</a></li>
+                <li class="nav-item"><a class="nav-link" href="guide.html">Personalized Guidance</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Expert Consultations</h2>
+        <p>Get personalized advice from expert doctors based on your symptoms and history.</p>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="symptoms">Describe your symptoms:</label>
+                <textarea class="form-control" id="symptoms" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="preferredTime">Preferred Consultation Time:</label>
+                <input type="datetime-local" class="form-control" id="preferredTime">
+            </div>
+            <button type="submit" class="btn btn-primary">Request Consultation</button>
+        </form>
+
+        <hr>
+
+        <h3>Meet Our Mentors</h3>
+
+        <!-- Mentor 1 -->
+        <div class="mentor-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfYpXafJ4HBpuQ4eaOhSZ92ut2qGYG0nizSA&s" alt="Dr. Ashwin K Mani" class="mentor-img">
+            <h4>Dr. Ashwin K Mani</h4>
+            <p>Dr. Ashwin K Mani is a leading pulmonologist with years of experience treating respiratory disorders. He specializes in asthma management and focuses on creating personalized treatment plans for patients. His approach combines medical expertise with compassionate care, ensuring the best outcomes for each individual.</p>
+        </div>
+
+        <!-- Mentor 2 -->
+        <div class="mentor-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgRwkg30BW4_PUQC4oHGj4JngKcjOd6n3UbQ&s" alt="Dr. Gomathi R G" class="mentor-img">
+            <h4>Dr. Gomathi R G</h4>
+            <p>Dr. Gomathi R G is an expert in pediatric respiratory care. With her expertise in asthma management in children, Dr. Gomathi is dedicated to providing comprehensive care and guidance to both young patients and their families. She works towards reducing symptoms and preventing future asthma exacerbations with a patient-centered approach.</p>
+        </div>
+
+        <!-- Mentor 3 -->
+        <div class="mentor-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp1oJKncZ7t2atYKHbFS0Q1v99aZX-TdpANA&s" alt="Dr. Devanathan V" class="mentor-img">
+            <h4>Dr. Devanathan V</h4>
+            <p>Dr. Devanathan V is a renowned allergist and immunologist who focuses on asthma triggered by environmental factors. With a wealth of experience in diagnosing and managing asthma triggered by allergies, Dr. Devanathan works closely with patients to minimize their exposure to triggers and improve their overall quality of life.</p>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Asthma Management. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

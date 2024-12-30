@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #b6d3ef;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #b6d3ef;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            color: #b6d3ef;
+        }
+        h2 {
+            text-align: center;
+            color: #fff;
+        }
+        .form-group label {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .btn-primary {
+            width: 100%;
+            background-color: #003366;
+            border-color: #003366;
+        }
+        .btn-danger {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .alert {
+            margin-top: 20px;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+        .alert a {
+            color: #ff9900;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #b6d3ef;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003366;">
+        <a class="navbar-brand" href="#">
+            <img src="med logo.jpg" alt="Logo" style="width: 50px; height: auto;">
+            MedARise
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="main.html">Medicheck</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="wound.html">Wound Checking</a></li>
+                <li class="nav-item"><a class="nav-link" href="calendar.html">Your Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="symp.html">Symptom Tracker</a></li>
+                <li class="nav-item"><a class="nav-link" href="reports.html">Weekly and Monthly Reports</a></li>
+                <li class="nav-item"><a class="nav-link" href="appointment.html">Doctor Appointments</a></li>
+                <li class="nav-item"><a class="nav-link" href="exp.html">Expert Consultations</a></li>
+                <li class="nav-item"><a class="nav-link" href="guide.html">Personalized Guidance</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Track Your Asthma Symptoms</h2>
+        <form id="symptomForm">
+            <!-- Day Time Symptoms -->
+            <div class="form-group">
+                <label for="daySymptoms">Day Time Symptoms:</label>
+                <select class="form-control" id="daySymptoms">
+                    <option value="None">None</option>
+                    <option value="Cough">Cough</option>
+                    <option value="Wheezing">Wheezing</option>
+                    <option value="Shortness of breath">Shortness of breath</option>
+                    <option value="Chest tightness">Chest tightness</option>
+                </select>
+            </div>
+
+            <!-- Night Time Symptoms -->
+            <div class="form-group">
+                <label for="nightSymptoms">Night Time Symptoms:</label>
+                <select class="form-control" id="nightSymptoms">
+                    <option value="None">None</option>
+                    <option value="Cough">Cough</option>
+                    <option value="Wheezing">Wheezing</option>
+                    <option value="Shortness of breath">Shortness of breath</option>
+                    <option value="Chest tightness">Chest tightness</option>
+                </select>
+            </div>
+
+            <!-- Night Awakening -->
+            <div class="form-group">
+                <label for="awakening">Night Awakening:</label>
+                <select class="form-control" id="awakening">
+                    <option value="None">None</option>
+                    <option value="1-2 times">1-2 times</option>
+                    <option value="3-4 times">3-4 times</option>
+                    <option value="More than 4 times">More than 4 times</option>
+                </select>
+            </div>
+
+            <!-- School/Activity Affected -->
+            <div class="form-group">
+                <label for="schoolActivity">School/Activity Affected:</label>
+                <select class="form-control" id="schoolActivity">
+                    <option value="None">None</option>
+                    <option value="Slightly affected">Slightly affected</option>
+                    <option value="Moderately affected">Moderately affected</option>
+                    <option value="Severely affected">Severely affected</option>
+                </select>
+            </div>
+
+            <!-- Reliever Needed -->
+            <div class="form-group">
+                <label for="reliever">Reliever Needed:</label>
+                <select class="form-control" id="reliever">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- Emergency Visit -->
+            <div class="form-group">
+                <label for="emergencyVisit">Emergency Visit:</label>
+                <select class="form-control" id="emergencyVisit">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Symptoms</button>
+            <button id="emergencyButton" type="button" class="btn btn-danger">Emergency</button>
+        </form>
+
+        <!-- Asthma Severity and Appointment Recommendation -->
+        <div id="severityResult" class="alert" style="display: none;">
+            <h4 id="severityLevel"></h4>
+            <p id="recommendation"></p>
+            <p id="appointmentLink" style="display: none;">
+                <a href="appointments.html" class="btn btn-warning">Click here to book your doctor appointment</a>
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Asthma Management. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('#symptomForm').submit(function(e) {
+                e.preventDefault();
+
+                // Collect the data from the form
+                var daySymptoms = $('#daySymptoms').val();
+                var nightSymptoms = $('#nightSymptoms').val();
+                var awakening = $('#awakening').val();
+                var schoolActivity = $('#schoolActivity').val();
+                var reliever = $('#reliever').val();
+                var emergencyVisit = $('#emergencyVisit').val();
+
+                // Calculate severity
+                var severity = calculateSeverity(daySymptoms, nightSymptoms, awakening, schoolActivity, reliever, emergencyVisit);
+
+                // Display results
+                $('#severityLevel').text("Asthma Severity: " + severity.level);
+                $('#recommendation').text(severity.recommendation);
+                if (severity.isSevere) {
+                    $('#appointmentLink').show(); // Show appointment booking link for severe condition
+                } else {
+                    $('#appointmentLink').hide(); // Hide appointment link for mild or moderate condition
+                }
+                $('#severityResult').show();
+
+                // Optionally, clear the form after submission
+                // $('#symptomForm')[0].reset();
+            });
+
+            // Emergency button click
+            $('#emergencyButton').click(function() {
+                sendEmergencyMessage();
+            });
+        });
+
+        function calculateSeverity(daySymptoms, nightSymptoms, awakening, schoolActivity, reliever, emergencyVisit) {
+            var severityScore = 0;
+
+            // Day Symptoms Impact
+            if (daySymptoms !== "None") severityScore++;
+
+            // Night Symptoms Impact
+            if (nightSymptoms !== "None") severityScore++;
+
+            // Night Awakening Frequency
+            if (awakening === "1-2 times") severityScore++;
+            else if (awakening === "3-4 times") severityScore += 2;
+            else if (awakening === "More than 4 times") severityScore += 3;
+
+            // School/Activity Affected
+            if (schoolActivity === "Moderately affected") severityScore++;
+            else if (schoolActivity === "Severely affected") severityScore += 2;
+
+                        // Reliever Usage
+                        if (reliever === "Yes") severityScore++;
+
+// Emergency Visit
+if (emergencyVisit === "Yes") severityScore += 3;
+
+// Determine severity level and recommendation
+var severityLevel = "";
+var recommendation = "";
+var isSevere = false;
+
+if (severityScore <= 2) {
+    severityLevel = "Mild";
+    recommendation = "Monitor your symptoms and use your reliever if needed.";
+} else if (severityScore <= 4) {
+    severityLevel = "Moderate";
+    recommendation = "Consider visiting your doctor to discuss your symptoms.";
+} else {
+    severityLevel = "Severe";
+    recommendation = "Seek medical attention immediately. Use your reliever and consult a doctor.";
+    isSevere = true;
+}
+
+return {
+    level: severityLevel,
+    recommendation: recommendation,
+    isSevere: isSevere
+};
+}
+
+function sendEmergencyMessage() {
+alert("An emergency message has been sent to your dear ones. Please stay calm and use your reliever medication.");
+}
+</script>
+</body>
+</html>
+

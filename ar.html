@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedARise</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #b6d3ef; /* Light blue background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #003366; /* Dark blue background */
+        }
+        
+        .navbar .navbar-brand {
+            font-size: 1.8rem; /* Increase title size */
+            color: white;
+        }
+
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Make navbar options white */
+            font-size: 1.1rem;
+        }
+
+        .navbar .navbar-brand img {
+            width: 50px; /* Adjust logo size */
+            height: auto;
+            margin-right: 10px;
+        }
+
+        /* Main content */
+        .content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .content img {
+            width: 80%;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            color: #003366;
+            margin-bottom: 1.5rem;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background-color: #003366; /* Dark blue color */
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0.5rem;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #002244;
+        }
+
+        .btn:active {
+            background-color: #001122;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <!-- Logo and Title -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="MedARise.jpg" alt="Logo" class="me-2">
+                <span>MedARise</span>
+            </a>
+
+            <!-- Navbar options for smaller screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="appointment.html">OP log</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="disease.html">prone-zone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ar.html">Vitals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://wear-studio.com/wp-content/uploads/2023/11/virtual-reality-for-medical-training.png" alt="Medical VR Image">
+        <h1>Welcome to MedARise</h1>
+        <p>Choose your view mode below to start your experience:</p>
+
+        <a href="#" class="btn" id="view-ar">View Through AR Kit</a>
+        <a href="#" class="btn" id="view-camera">View Through Camera</a>
+    </div>
+
+    <!-- Bootstrap 5 JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById("view-camera").addEventListener("click", function(event) {
+            event.preventDefault();
+            // Trigger mobile camera (for mobile devices only)
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        // You can add functionality to display the camera feed on the page here
+                        let videoElement = document.createElement('video');
+                        videoElement.srcObject = stream;
+                        videoElement.autoplay = true;
+                        document.body.appendChild(videoElement);
+                    })
+                    .catch(function(err) {
+                        alert("Error accessing the camera: " + err);
+                    });
+            } else {
+                alert("Camera not supported on this device.");
+            }
+        });
+
+        // You can add AR Kit integration logic here when available
+        document.getElementById("view-ar").addEventListener("click", function(event) {
+            event.preventDefault();
+            alert("AR Kit functionality is currently not implemented.");
+        });
+    </script>
+</body>
+</html>
+
+
+
+

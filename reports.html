@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly and Monthly Reports</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <style>
+        body {
+            background-color: #b6d3ef;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #b6d3ef;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            color: #b6d3ef;
+        }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .description-container {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #b6d3ef;
+        }
+
+        .navbar {
+            background-color: #003366;
+        }
+
+        .navbar .navbar-nav .nav-link {
+            color: white !important;
+        }
+
+        .navbar-nav.ml-auto {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html">
+            <img src="med logo.jpg" alt="Logo" height="40">
+            <span>MedARise</span>
+        </a>
+    
+        <!-- Add the navbar-toggler button to make the menu collapse on small screens -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <!-- Collapse the navbar items into a div -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="main.html">Medicheck</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="wound.html">Wound Checking</a></li>
+                <li class="nav-item"><a class="nav-link" href="calendar.html">Your Calendar</a></li>
+                <li class="nav-item"><a class="nav-link" href="symp.html">Symptom Tracker</a></li>
+                <li class="nav-item"><a class="nav-link" href="reports.html">Weekly and Monthly Reports</a></li>
+                <li class="nav-item"><a class="nav-link" href="appointment.html">Doctor Appointments</a></li>
+                <li class="nav-item"><a class="nav-link" href="exp.html">Expert Consultations</a></li>
+                <li class="nav-item"><a class="nav-link" href="guide.html">Personalized Guidance</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div class="container">
+        <h2>Weekly and Monthly Asthma Reports</h2>
+
+        <!-- Weekly Report Section -->
+        <h3>Weekly Report</h3>
+        <p>Below is a report showing the asthma symptoms in the past week:</p>
+        <div class="chart-container">
+            <canvas id="weeklyPieChart"></canvas>
+        </div>
+        <p>Number of asthma-related hospital visits this week:</p>
+        <div class="chart-container">
+            <canvas id="weeklyBarChart"></canvas>
+        </div>
+
+        <!-- Monthly Report Section -->
+        <h3>Monthly Report</h3>
+        <p>Below is a report showing the asthma symptoms in the past month:</p>
+        <div class="chart-container">
+            <canvas id="monthlyPieChart"></canvas>
+        </div>
+        <p>Number of asthma-related hospital visits this month:</p>
+        <div class="chart-container">
+            <canvas id="monthlyBarChart"></canvas>
+        </div>
+
+        <!-- Color Legend Section -->
+        <div class="description-container">
+            <h4>Color Descriptions</h4>
+            <p><strong>#FF5733:</strong> Cough (Red)</p>
+            <p><strong>#33FF57:</strong> Wheezing (Green)</p>
+            <p><strong>#3357FF:</strong> Shortness of Breath (Blue)</p>
+            <p><strong>#FF33A1:</strong> Chest Tightness (Pink)</p>
+            <p><strong>#FFFF33:</strong> No Symptoms (Yellow)</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Asthma Management. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Add jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Add Popper.js (necessary for Bootstrap's dropdowns and tooltips) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
+    <!-- Add Bootstrap's JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Weekly Pie Chart
+        var ctx = document.getElementById('weeklyPieChart').getContext('2d');
+        var weeklyPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Cough', 'Wheezing', 'Shortness of Breath', 'Chest Tightness', 'No Symptoms'],
+                datasets: [{
+                    label: 'Weekly Asthma Symptoms',
+                    data: [30, 40, 20, 10, 5],  // Example data for symptoms
+                    backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#FFFF33'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Weekly Bar Chart
+        var ctx2 = document.getElementById('weeklyBarChart').getContext('2d');
+        var weeklyBarChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Hospital Visits (Weekly)',
+                    data: [1, 2, 3, 2, 1, 4, 3],  // Example data for weekly hospital visits
+                    backgroundColor: '#4CAF50',
+                    borderColor: '#388E3C',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Monthly Pie Chart
+        var ctx3 = document.getElementById('monthlyPieChart').getContext('2d');
+        var monthlyPieChart = new Chart(ctx3, {
+            type: 'pie',
+            data: {
+                labels: ['Cough', 'Wheezing', 'Shortness of Breath', 'Chest Tightness', 'No Symptoms'],
+                datasets: [{
+                    label: 'Monthly Asthma Symptoms',
+                    data: [25, 35, 25, 10, 5],  // Example data for symptoms in the month
+                    backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#FFFF33'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Monthly Bar Chart
+        var ctx4 = document.getElementById('monthlyBarChart').getContext('2d');
+        var monthlyBarChart = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Hospital Visits (Monthly)',
+                    data: [5, 4, 6, 3],  // Example data for monthly hospital visits
+                    backgroundColor: '#FF9800',
+                    borderColor: '#F57C00',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedARise</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        .navbar {
+            background-color: #003366; /* Dark blue background */
+        }
+        .navbar .navbar-brand {
+            font-size: 1.8rem; /* Increase title size */
+        }
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Make navbar options white */
+            font-size: 1.1rem;
+        }
+        .navbar .navbar-brand img {
+            width: 50px; /* Adjust logo size */
+            height: auto;
+        }
+
+        /* Main content styles */
+        .main-content {
+            background-color: #B6D3EF;
+            padding: 50px 0;
+        }
+
+        .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #003366; /* Dark border */
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .card {
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Google Translate Widget */
+        #google_translate_element {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="MedARise.jpg" alt="Logo" class="me-2">
+                <span>MedARise</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="counselling.html">Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="op.html">OP Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="main.html">Medicheck</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cbt.html">CBT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="disease.html">Prone-zone</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Quotes Section -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <p class="quote">"The good physician treats the disease; the great physician treats the patient who has the disease." - William Osler</p>
+                    <p class="quote">"To cure sometimes, to relieve often, to comfort always." - Edward Livingston Trudeau</p>
+                </div>
+            </div>
+
+            <!-- Carousel Section -->
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://domf5oio6qrcr.cloudfront.net/medialibrary/9073/conversions/iStock-471747865-thumb.jpg" class="d-block w-100" alt="Image 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://www.visaplace.com/wp-content/uploads/2020/10/artur-tumasjan-qLzWvcQq-V8-unsplash.jpg" class="d-block w-100" alt="Image 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://spinehealth.org/wp-content/uploads/2023/01/tv-doctors-real-not-real.jpg" class="d-block w-100" alt="Image 3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <!-- Cards Section -->
+            <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+                <div class="col">
+                    <div class="card h-100" onclick="window.location.href='login.html'">
+                        <img src="https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg?cs=srgb&dl=pexels-cottonbro-7579831.jpg&fm=jpg" class="card-img-top" alt="Factor 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Log in</h5>
+                            <p class="card-text">Access the application by logging in securely to view personalized medical features.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100" onclick="window.location.href='counselling.html'">
+                        <img src="https://bcdn.mindler.com/bloglive/wp-content/uploads/2019/03/11113602/How-to-Become-a-Counsellor-in-India-770x385.png" class="card-img-top" alt="Factor 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Guide</h5>
+                            <p class="card-text">Get comprehensive guidance on using advanced AR/VR tools for enhanced healthcare experiences.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100" onclick="window.location.href='op.html'">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3In2mFaw0LkI3KEiAmJuSB7-3nhcNwCCEvg&s" class="card-img-top" alt="Factor 3">
+                        <div class="card-body">
+                            <h5 class="card-title">OP Booking</h5>
+                            <p class="card-text">Schedule outpatient appointments seamlessly with integrated booking features.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100" onclick="window.location.href='cbt.html'">
+                        <img src="https://nationalsocialanxietycenter.com//wp-content/uploads/2014/08/cbtgraph21.jpg" class="card-img-top" alt="Factor 4">
+                        <div class="card-body">
+                            <h5 class="card-title">CBT</h5>
+                            <p class="card-text">Explore cognitive-behavioral therapy resources for mental health support.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100" onclick="window.location.href='disease.html'">
+                        <img src="https://benthamopen.com/contents/figures/TOVJ/TOVJ-12-80_F1.jpg" class="card-img-top" alt="Factor 5">
+                        <div class="card-body">
+                            <h5 class="card-title">Prone-zone Areas</h5>
+                            <p class="card-text">Identify disease-prone areas and take preventive measures using advanced analytics.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100" onclick="window.location.href='main.html'">
+                        <img src="https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_792769_1728563327189354.jpg" class="card-img-top" alt="Factor 6">
+                        <div class="card-body">
+                            <h5 class="card-title">Medicheck</h5>
+                            <p class="card-text">Check your daily or periodically sessions for your health and other symptoms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element"></div>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ta', // Tamil language
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+

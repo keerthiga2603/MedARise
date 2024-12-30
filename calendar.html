@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Calendar - Asthma Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> <!-- Moment.js for date handling -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script> <!-- FullCalendar JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.css"> <!-- FullCalendar CSS -->
+    <style>
+        body {
+            background-color: #b6d3ef;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #b6d3ef;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #003366; /* Dark blue background */
+        }
+        .navbar .navbar-brand {
+            font-size: 1.8rem; /* Increase title size */
+        }
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Make navbar options white */
+            font-size: 1.1rem;
+        }
+        .navbar .navbar-brand img {
+            width: 50px; /* Adjust logo size */
+            height:auto;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        h3, h4, h5 {
+            color: #b6d3ef;
+        }
+
+        .calendar-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        #calendar {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #b6d3ef;
+        }
+
+        /* Hide the form by default */
+        #editForm {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="index.html">
+        <img src="med logo.jpg" alt="Logo">
+        <span>MedARise</span>
+    </a>
+
+    <!-- Add the navbar-toggler button to make the menu collapse on small screens -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapse the navbar items into a div -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="main.html">Medicheck</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="wound.html">Wound Checking</a></li>
+            <li class="nav-item"><a class="nav-link" href="calendar.html">Your Calendar</a></li>
+            <li class="nav-item"><a class="nav-link" href="symp.html">Symptom Tracker</a></li>
+            <li class="nav-item"><a class="nav-link" href="reports.html">Weekly and Monthly Reports</a></li>
+            <li class="nav-item"><a class="nav-link" href="appointment.html">Doctor Appointments</a></li>
+            <li class="nav-item"><a class="nav-link" href="exp.html">Expert Consultations</a></li>
+            <li class="nav-item"><a class="nav-link" href="guide.html">Personalized Guidance</a></li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- Calendar Section -->
+<div class="container mt-5">
+    <h3>Your Asthma Management Calendar</h3>
+    <p>Click on any date to edit your asthma-related details.</p>
+
+    <!-- Calendar -->
+    <div class="calendar-container">
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Edit Form (hidden by default) -->
+    <div id="editForm">
+        <h4>Edit Symptoms for <span id="selectedDate"></span></h4>
+        <form id="symptomForm">
+            <!-- Dropdown for Day Time Symptoms -->
+            <div class="form-group">
+                <label for="daySymptoms">Day Time Symptoms:</label>
+                <select class="form-control" id="daySymptoms">
+                    <option value="None">None</option>
+                    <option value="Cough">Cough</option>
+                    <option value="Wheezing">Wheezing</option>
+                    <option value="Shortness of breath">Shortness of breath</option>
+                    <option value="Chest tightness">Chest tightness</option>
+                </select>
+            </div>
+
+            <!-- Dropdown for Night Time Symptoms -->
+            <div class="form-group">
+                <label for="nightSymptoms">Night Time Symptoms:</label>
+                <select class="form-control" id="nightSymptoms">
+                    <option value="None">None</option>
+                    <option value="Cough">Cough</option>
+                    <option value="Wheezing">Wheezing</option>
+                    <option value="Shortness of breath">Shortness of breath</option>
+                    <option value="Chest tightness">Chest tightness</option>
+                </select>
+            </div>
+
+            <!-- Dropdown for Night Awakening -->
+            <div class="form-group">
+                <label for="awakening">Night Awakening:</label>
+                <select class="form-control" id="awakening">
+                    <option value="None">None</option>
+                    <option value="1-2 times">1-2 times</option>
+                    <option value="3-4 times">3-4 times</option>
+                    <option value="More than 4 times">More than 4 times</option>
+                </select>
+            </div>
+
+            <!-- Dropdown for School/Activity Affected -->
+            <div class="form-group">
+                <label for="schoolActivity">School/Activity Affected:</label>
+                <select class="form-control" id="schoolActivity">
+                    <option value="None">None</option>
+                    <option value="Slightly affected">Slightly affected</option>
+                    <option value="Moderately affected">Moderately affected</option>
+                    <option value="Severely affected">Severely affected</option>
+                </select>
+            </div>
+
+            <!-- Dropdown for Reliever Needed -->
+            <div class="form-group">
+                <label for="reliever">Reliever Needed:</label>
+                <select class="form-control" id="reliever">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- Dropdown for Emergency Visit -->
+            <div class="form-group">
+                <label for="emergencyVisit">Emergency Visit:</label>
+                <select class="form-control" id="emergencyVisit">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2024 Asthma Management. All Rights Reserved.</p>
+</footer>
+
+<!-- JavaScript -->
+<script>
+    $(document).ready(function() {
+        // Initialize the calendar
+        $('#calendar').fullCalendar({
+            selectable: true,
+            events: [],
+            select: function(startDate, endDate) {
+                var date = startDate.format('YYYY-MM-DD');
+                $('#selectedDate').text(date);
+                $('#editForm').show();  // Show the form when a date is clicked
+            }
+        });
+
+        // Handle form submission
+        $('#symptomForm').submit(function(e) {
+            e.preventDefault();
+
+            // Get the data from the form
+            var daySymptoms = $('#daySymptoms').val();
+            var nightSymptoms = $('#nightSymptoms').val();
+            var awakening = $('#awakening').val();
+            var schoolActivity = $('#schoolActivity').val();
+            var reliever = $('#reliever').val();
+            var emergencyVisit = $('#emergencyVisit').val();
+
+            // For now, just log the data to the console (you can send this to a backend)
+            console.log({
+                date: $('#selectedDate').text(),
+                daySymptoms: daySymptoms,
+                nightSymptoms: nightSymptoms,
+                awakening: awakening,
+                schoolActivity: schoolActivity,
+                reliever: reliever,
+                emergencyVisit: emergencyVisit
+            });
+
+            // Hide the form after submission
+            $('#editForm').hide();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Log</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: #003366; /* Dark blue background */
+        }
+        .navbar .navbar-brand {
+            font-size: 1.8rem; /* Increase title size */
+        }
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Make navbar options white */
+            font-size: 1.1rem;
+        }
+        .navbar .navbar-brand img {
+            width: 50px; /* Adjust logo size */
+            height: auto;
+        }
+        body {
+            background-color: #b6d3ef;
+        }
+        .log-container {
+            margin-top: 50px;
+        }
+        .appointment-card {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .modal-content {
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <!-- Logo and Title -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="MedARise.jpg" alt="Logo" class="me-2">
+                <span>MedARise</span>
+            </a>
+
+            <!-- Navbar options -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="appointment.html">OP log</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="disease.html">prone-zone</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="ar.html">Vitals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container log-container">
+        <h1 class="text-center">Appointment Log</h1>
+        <div class="d-flex justify-content-center my-3">
+            <select id="hospitalDropdown" class="form-select w-50">
+                <option value="" selected>Select Hospital</option>
+            </select>
+            <button class="btn btn-primary ms-3" onclick="filterAppointments()">Filter</button>
+        </div>
+        <div id="appointmentList" class="mt-4">
+            <!-- Appointments will be dynamically added here -->
+        </div>
+
+        <!-- Modal for Hospital Details -->
+        <div class="modal fade" id="hospitalDetailsModal" tabindex="-1" aria-labelledby="hospitalDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="hospitalDetailsModalLabel">Hospital Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalHospitalDetails">
+                        <!-- Hospital details will be populated here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+        const appointmentList = document.getElementById('appointmentList');
+        const hospitalDropdown = document.getElementById('hospitalDropdown');
+
+        // Populate hospital dropdown
+        function populateHospitalDropdown() {
+            const hospitals = [...new Set(appointments.map(a => a.hospital))];
+            hospitals.forEach(hospital => {
+                const option = document.createElement('option');
+                option.value = hospital;
+                option.textContent = hospital;
+                hospitalDropdown.appendChild(option);
+            });
+        }
+
+        // Render filtered appointments
+        function renderAppointments(filteredAppointments = appointments) {
+            appointmentList.innerHTML = '';
+            if (filteredAppointments.length > 0) {
+                filteredAppointments.forEach((appointment, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'card appointment-card';
+                    card.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">Patient: ${appointment.patientName}</h5>
+                            <p class="card-text"><strong>Hospital:</strong> ${appointment.hospital}</p>
+                            <p class="card-text"><strong>Date:</strong> ${appointment.appointmentDate}</p>
+                            <button class="btn btn-primary" onclick="viewHospitalDetails(${index})">View Hospital Details</button>
+                        </div>
+                    `;
+                    appointmentList.appendChild(card);
+                });
+            } else {
+                appointmentList.innerHTML = '<p class="text-center">No appointments found for the selected hospital.</p>';
+            }
+        }
+
+        // Filter appointments by selected hospital
+        function filterAppointments() {
+            const selectedHospital = hospitalDropdown.value;
+            if (selectedHospital) {
+                const filteredAppointments = appointments.filter(a => a.hospital === selectedHospital);
+                renderAppointments(filteredAppointments);
+            } else {
+                renderAppointments();
+            }
+        }
+
+        // Show hospital details in the modal
+        function viewHospitalDetails(index) {
+            const appointment = appointments[index];
+            const modalHospitalDetails = document.getElementById('modalHospitalDetails');
+            modalHospitalDetails.innerHTML = `
+                <p><strong>Hospital:</strong> ${appointment.hospital}</p>
+                <p><strong>Appointment Date:</strong> ${appointment.appointmentDate}</p>
+                <p><strong>Patient Name:</strong> ${appointment.patientName}</p>
+            `;
+            const modal = new bootstrap.Modal(document.getElementById('hospitalDetailsModal'));
+            modal.show();
+        }
+
+        // Initialize the page
+        populateHospitalDropdown();
+        renderAppointments();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
